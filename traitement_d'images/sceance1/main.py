@@ -20,7 +20,7 @@ class Image:
         pass
 
     def read_pgm(self, f):
-        self.comment = f.readline()
+        self.comment = f.readline()[:-1]
         tmp = f.readline()
         self.cols, self.lines = tmp.split()
         self.cols, self.lines = int(self.cols), int(self.lines)
@@ -37,7 +37,9 @@ class Image:
     def write(self, path):
         with open(path, 'w') as f:
             f.write(self.format)
+            f.write('\n')
             f.write(self.comment)
+            f.write('\n')
             f.write(str(self.cols) + " " + str(self.lines))
             f.write('\n')
             f.write(str(self.pixels))
